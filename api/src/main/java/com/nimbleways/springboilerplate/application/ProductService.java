@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nimbleways.springboilerplate.domain.Product;
+import com.nimbleways.springboilerplate.domain.TimeProvider;
 import com.nimbleways.springboilerplate.infrastructure.persistence.ProductRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class ProductService {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired(required = false)
+    private TimeProvider timeProvider = () -> LocalDate.now();
+
     public void notifyDelay(int leadTime, Product product) {
         product.setLeadTime(leadTime);
         productRepository.save(product);
@@ -27,11 +31,12 @@ public class ProductService {
     }
 
     public void handleSeasonalProduct(Product product) {
-        if (LocalDate.now().plusDays(product.getLeadTime()).isAfter(product.getSeasonEndDate())) {
+        LocalDate now = timeProvider.getCurrentDate();
+        if (now.plusDays(product.getLeadTime()).isAfter(product.getSeasonEndDate())) {
             notificationService.sendOutOfStockNotification(product.getName());
             product.setAvailable(ZERO_STOCK);
             productRepository.save(product);
-        } else if (product.getSeasonStartDate().isAfter(LocalDate.now())) {
+        } else if (product.getSeasonStartDate().isAfter(now)) {
             notificationService.sendOutOfStockNotification(product.getName());
             productRepository.save(product);
         } else {
@@ -40,7 +45,8 @@ public class ProductService {
     }
 
     public void handleExpiredProduct(Product product) {
-        if (product.getAvailable() > ZERO_STOCK && product.getExpiryDate().isAfter(LocalDate.now())) {
+        LocalDate now = timeProvider.getCurrentDate();
+        if (product.getAvailable() > ZERO_STOCK && product.getExpiryDate().isAfter(now)) {
             product.setAvailable(product.getAvailable() - DECREMENT_UNIT);
             productRepository.save(product);
         } else {
