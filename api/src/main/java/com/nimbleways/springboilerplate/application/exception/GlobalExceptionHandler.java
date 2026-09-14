@@ -1,4 +1,4 @@
-package com.nimbleways.springboilerplate.exposition;
+package com.nimbleways.springboilerplate.application.exception;
 
 import com.nimbleways.springboilerplate.domain.exceptions.OrderNotFoundException;
 import com.nimbleways.springboilerplate.exposition.dto.ErrorResponse;

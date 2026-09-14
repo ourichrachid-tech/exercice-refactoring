@@ -1,5 +1,6 @@
-package com.nimbleways.springboilerplate.domain;
+package com.nimbleways.springboilerplate.infrastructure.clock;
 
+import com.nimbleways.springboilerplate.domain.TimeProvider;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
