@@ -1,8 +1,8 @@
-package com.nimbleways.springboilerplate.repositories;
+package com.nimbleways.springboilerplate.infrastructure.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nimbleways.springboilerplate.entities.Product;
+import com.nimbleways.springboilerplate.domain.Product;
 import java.util.Optional;
 import java.util.UUID;
 
