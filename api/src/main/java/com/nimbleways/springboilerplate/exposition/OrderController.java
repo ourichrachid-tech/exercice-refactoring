@@ -1,11 +1,11 @@
-package com.nimbleways.springboilerplate.controllers;
+package com.nimbleways.springboilerplate.exposition;
 
-import com.nimbleways.springboilerplate.dto.product.ProcessOrderResponse;
-import com.nimbleways.springboilerplate.entities.Order;
-import com.nimbleways.springboilerplate.entities.Product;
-import com.nimbleways.springboilerplate.repositories.OrderRepository;
-import com.nimbleways.springboilerplate.repositories.ProductRepository;
-import com.nimbleways.springboilerplate.services.implementations.ProductService;
+import com.nimbleways.springboilerplate.application.ProductService;
+import com.nimbleways.springboilerplate.exposition.dto.ProcessOrderResponse;
+import com.nimbleways.springboilerplate.domain.Order;
+import com.nimbleways.springboilerplate.domain.Product;
+import com.nimbleways.springboilerplate.infrastructure.persistence.OrderRepository;
+import com.nimbleways.springboilerplate.infrastructure.persistence.ProductRepository;
 
 import java.time.LocalDate;
 import java.util.Set;
